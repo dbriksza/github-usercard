@@ -2,8 +2,12 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+entryPoint = document.querySelector(".cards");
+
 axios.get("https://api.github.com/users/dbriksza").then(response => {
   console.log(response);
+  const person = teamCard(response);
+  entryPoint.appendChild(person);
 });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -63,25 +67,32 @@ function teamCard(arr) {
 
   profImg.src = arr.data.avatar_url;
   name.textContent = arr.data.name;
-  userName.textContent = arr.data.login;
-  location.textContent = arr.data.location;
-  profile.textContent = "Profile: ";
+  userName.textContent = `User Name: ${arr.data.login}`;
+  location.textContent = `location: ${arr.data.location}`;
+  profile.textContent = `Profile: `;
   profLink.textContent = arr.data.html_url;
   profLink.href = arr.data.html_url;
-  followers.textContent = arr.data.followers;
-  following.textContent = arr.data.followig;
-  bio.textContent = "Bio: " + arr.data.bio;
+  followers.textContent = `Followers: ${arr.data.followers}`;
+  following.textContent = `Following: ${arr.data.following}`;
+  bio.textContent = `Bio: ${arr.data.bio}`;
 
   newCard.appendChild(profImg);
   newCard.appendChild(cardInfo);
   cardInfo.appendChild(name);
   cardInfo.appendChild(userName);
-  newCard.appendChild(location);
-  newCard.appendChild(profile);
-  newCard.appendChild(followers);
-  newCard.appendChild(following);
-  newCard.appendChild(bio);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
   profile.appendChild(profLink);
+
+  newCard.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  userName.classList.add("username");
+
+  return newCard;
 }
 
 /* List of LS Instructors Github username's: 
