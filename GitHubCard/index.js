@@ -2,7 +2,9 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-
+axios.get("https://api.github.com/users/dbriksza").then(response => {
+  console.log(response);
+});
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -45,6 +47,42 @@ const followersArray = [];
 </div>
 
 */
+
+function teamCard(arr) {
+  const newCard = document.createElement("div");
+  const profImg = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const userName = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profLink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  profImg.src = arr.data.avatar_url;
+  name.textContent = arr.data.name;
+  userName.textContent = arr.data.login;
+  location.textContent = arr.data.location;
+  profile.textContent = "Profile: ";
+  profLink.textContent = arr.data.html_url;
+  profLink.href = arr.data.html_url;
+  followers.textContent = arr.data.followers;
+  following.textContent = arr.data.followig;
+  bio.textContent = "Bio: " + arr.data.bio;
+
+  newCard.appendChild(profImg);
+  newCard.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(userName);
+  newCard.appendChild(location);
+  newCard.appendChild(profile);
+  newCard.appendChild(followers);
+  newCard.appendChild(following);
+  newCard.appendChild(bio);
+  profile.appendChild(profLink);
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
